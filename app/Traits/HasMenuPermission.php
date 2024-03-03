@@ -12,7 +12,7 @@ trait HasMenuPermission{
          */
 
          if(!is_array($permissions)){
-            $permissions = ['create', 'read', 'update', 'delete'];
+            $permissions = ['create ', 'read ', 'update ', 'delete '];
          }
 
          foreach($permissions as $item){

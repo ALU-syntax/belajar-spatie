@@ -157,6 +157,15 @@
                                 <i class="ti-settings"></i> Setting
                             </div>
                         </a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
                         <a href="#">
                             <div class="description">
                                 <i class="ti-power-off"></i> Logout
