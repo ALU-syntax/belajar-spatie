@@ -63,10 +63,21 @@
                                 @foreach($mainMenus as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
-                                
                             </select>
                         </div>
+                    </div>
 
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label for="" class="form-label d-block mb-2">Permissions</label>
+                            @foreach(['create', 'read', 'update', 'delete'] as $item)
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="permissions[]" id="inlineCheckbox1{{ $item }}"
+                                        value="{{ $item }}">
+                                    <label class="form-check-label" for="inlineCheckbox1{{ $item }}">{{ $item }}</label>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
 
                 </div>

@@ -39,6 +39,7 @@ class MenuController extends Controller
      */
     public function store(MenuRequest $request, Menu $menu)
     {
+        $this->authorize('create konfigurasi/menu');
         $menu->fill($request->validated());
         $menu->fill([
             'orders' => $request->orders,
@@ -48,6 +49,10 @@ class MenuController extends Controller
         ]);
 
         $menu->save();
+
+        foreach($request->permissions as $permission){
+            Permission::create(['name' => $permission . " {$menu->url}"])->menus()->attach($menu);
+        }
 
         return response()->json([
             'status' => 'success',
