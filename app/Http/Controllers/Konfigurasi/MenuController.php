@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Konfigurasi;
 
-use App\DataTables\Konfigurasi\MenuDataTable;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Konfigurasi\MenuRequest;
-use App\Models\Konfigurasi\Menu;
+use App\Models\Permission;
 use Illuminate\Http\Request;
+use App\Models\Konfigurasi\Menu;
+use App\Http\Controllers\Controller;
+use App\DataTables\Konfigurasi\MenuDataTable;
+use App\Http\Requests\Konfigurasi\MenuRequest;
 
 class MenuController extends Controller
 {
