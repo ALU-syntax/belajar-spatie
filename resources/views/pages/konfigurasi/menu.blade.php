@@ -32,10 +32,25 @@
                 $.ajax({
                     url: this.href,
                     method: 'get',
+                    beforeSend: function(){
+                        showLoader()
+                    },
+                    complete: function(){
+                        showLoader(false)
+                    },
                     success: function(res){
                         const modal = $('#modal_action');
                         modal.html(res);
                         modal.modal('show');
+
+                        $('[name="level_menu"]').on('change', function(){
+                            console.log(this.value)
+                            if(this.value == 'sub_menu'){
+                                $('#main_menu_wrapper').removeClass('d-none')
+                            }else{
+                                $('#main_menu_wrapper').addClass('d-none')
+                            }
+                        })
 
                         $('#form_action').on('submit', function(e){
                             e.preventDefault();
@@ -49,9 +64,14 @@
                                 beforeSend: function(){
                                     $(_form).find('.is-invalid').removeClass('is-invalid')
                                     $(_form).find(".invalid-feedback").remove()
+                                    submitLoader().show()
                                 },
                                 success: function(res){
                                     $('#modal_action').modal('hide')
+                                    window.LaravelDataTables['menu-table'].ajax.reload()
+                                },
+                                complete: function(){
+                                    submitLoader().hide()
                                 },
                                 error: function(err){
                                     const errors = err.responseJSON?.errors
