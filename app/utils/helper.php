@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Konfigurasi\Menu;
+
 if(!function_exists('responseError')){
     function responseError(\Exception | string $th)
     {
@@ -30,5 +32,19 @@ if(!function_exists('responseSuccess')){
             'message' => $isEdit ? 'Update data Successfully' : 'Create data Successfully',
         ]);
 
+    }
+}
+
+if(!function_exists('menus')){
+    function menus(){
+        $menus = Menu::with(['subMenus' => function($query){
+            return $query->orderBy('orders');
+        }])->whereNull('main_menu_id')
+        ->active()
+        ->orderBy('orders')
+        ->get()
+        ->groupBy("category");
+
+        return $menus;
     }
 }

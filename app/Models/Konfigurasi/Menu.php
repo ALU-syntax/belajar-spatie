@@ -18,4 +18,8 @@ class Menu extends Model
     public function permissions(){
         return $this->belongsToMany(Permission::class, 'menu_permission', 'permission_id', 'menu_id');
     }
+
+    public function scopeActive($query){
+        return $query->where('active', 1);
+    }
 }
