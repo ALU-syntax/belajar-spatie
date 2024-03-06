@@ -116,6 +116,7 @@
 
         function handleFormSubmit(selector) {
             function init() {
+                const _this = this;
                 $(selector).on('submit', function(e) {
                     e.preventDefault();
                     const _form = this
@@ -131,12 +132,12 @@
                             submitLoader().show()
                         },
                         success: (res) => {
-                            if (this.runDefaultSuccessCallback) {
+                            if (_this.runDefaultSuccessCallback) {
                                 $('#modal_action').modal('hide')
                             }
 
-                            this, onSuccessCallback && this.onSuccessCallback(res)
-                            this.dataTableId && window.LaravelDataTables[this.dataTableId].ajax.reload()
+                            _this.onSuccessCallback && _this.onSuccessCallback(res)
+                            _this.dataTableId && window.LaravelDataTables[_this.dataTableId].ajax.reload()
 
                         },
                         complete: function() {
@@ -182,6 +183,7 @@
         }
 
         function handleAjax(url, method = 'get') {
+
             function onSuccess(cb, runDefault = true) {
                 this.onSuccessCallback = cb
                 this.runDefaultSuccessCallback = runDefault

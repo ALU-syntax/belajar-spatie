@@ -26,24 +26,38 @@
         {!! $dataTable->scripts() !!}
 
         <script>
+            function handleMenuChange() {
+                $('[name="level_menu"]').on('change', function() {
+                    console.log(this.value)
+                    if (this.value == 'sub_menu') {
+                        $('#main_menu_wrapper').removeClass('d-none')
+                    } else {
+                        $('#main_menu_wrapper').addClass('d-none')
+                    }
+                });
+            }
+
             $('.add').on('click', function(e) {
                 e.preventDefault();
-                handleAjax(this.href).onSuccess(function(res) {
-                    $('[name="level_menu"]').on('change', function() {
-                        console.log(this.value)
-                        if (this.value == 'sub_menu') {
-                            $('#main_menu_wrapper').removeClass('d-none')
-                        } else {
-                            $('#main_menu_wrapper').addClass('d-none')
-                        }
-                    })
+                handleAjax(this.href)
+                .onSuccess(function(res) {
+                    handleMenuChange();
                     handleFormSubmit('#form_action')
-                        .onSuccess(function(res) {
+                    .setDataTable('menu-table')
+                    .init();
+                })
+                .excute();
 
-                        }).setDataTable('menu-table')
+            });
+
+            $('#menu-table').on('click', '.action', function(e) {
+                e.preventDefault();
+                handleAjax(this.href).onSuccess(function(res) {
+                    handleMenuChange()
+                    handleFormSubmit('#form_action')
+                        .setDataTable('menu-table')
                         .init();
                 }).excute();
-
             });
         </script>
     @endpush
