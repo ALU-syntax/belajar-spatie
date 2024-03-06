@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="{{ asset('') }}vendor/themify-icons/themify-icons.css">
     <link rel="stylesheet" href="{{ asset('') }}vendor/perfect-scrollbar/css/perfect-scrollbar.css">
     <link href="{{ asset('') }}vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
-    <link href="{{ asset('') }}vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css"
-        rel="stylesheet" />
+    <link href="{{ asset('') }}vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('') }}vendor/izitoast/css/iziToast.min.css">
 
     <!-- CSS for this page only -->
     @stack('cssLibrary')
@@ -63,6 +63,7 @@
     <script src="{{ asset('') }}vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="{{ asset('') }}vendor/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
     <script src="{{ asset('') }}assets/js/pages/datatables.min.js"></script>
+    <script src="{{ asset('') }}vendor/izitoast/js/iziToast.min.js"></script>
 
     <!-- js for this page only -->
     @stack('jsLibrary')
@@ -114,6 +115,14 @@
             };
         }
 
+        function showToast(status = 'success', message){
+            iziToast[status]({
+                title: status == 'success' ? 'Success' : 'Error',
+                message: message,
+                position: 'topRight'
+            });
+        }
+
         function handleFormSubmit(selector) {
             function init() {
                 const _this = this;
@@ -134,6 +143,7 @@
                         success: (res) => {
                             if (_this.runDefaultSuccessCallback) {
                                 $('#modal_action').modal('hide')
+                                showToast(res.status, res.message)
                             }
 
                             _this.onSuccessCallback && _this.onSuccessCallback(res)
@@ -156,6 +166,8 @@
                                         )
                                 }
                             }
+
+                            showToast('error', err.responseJSON?.message)
                         }
                     })
                 })
