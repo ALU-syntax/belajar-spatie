@@ -19,8 +19,8 @@ class MenuSeeder extends Seeder
         /** 
          * @var Menu $mm
          */
-        $mm = Menu::firstOrCreate(['url' => 'konfigurasi'],['name' => 'Konfigurasi', 'category' => 'KONFIGURASI','icon' => 'settings']);
-        $this->attachMenuPermission($mm, ['read'], ['ceo']);
+        $mm = Menu::firstOrCreate(['url' => 'konfigurasi'],['name' => 'Konfigurasi', 'category' => 'MASTER DATA','icon' => 'settings']);
+        $this->attachMenuPermission($mm, ['read '], ['ceo']);
         
         $sm = $mm->subMenus()->create(['name' => 'Menu', 'url' => $mm->url . '/menu', 'category' => $mm->category]);
         $this->attachMenuPermission($sm, null, ['ceo']);
@@ -28,9 +28,14 @@ class MenuSeeder extends Seeder
         $this->attachMenuPermission($sm, null, ['ceo']);
 
         $mm = Menu::firstOrCreate(['url' => 'master-data'],['name' => 'Master Data', 'category' => 'MASTER DATA','icon' => 'book']);
-        $this->attachMenuPermission($mm, ['read'], ['ceo']);
+        $this->attachMenuPermission($mm, ['read '], ['ceo']);
         
         $sm = $mm->subMenus()->create(['name' => 'Tags', 'url' => $mm->url . '/tags', 'category' => $mm->category]);
         $this->attachMenuPermission($sm, null, ['ceo']);
+
+        $mm = Menu::firstOrCreate(['url' => 'articles'],['name' => 'Articles', 'category' => 'CONTENT','icon' => 'book']);
+        $this->attachMenuPermission($mm, ['read '], ['ceo']);
+
+        
     }
 }
