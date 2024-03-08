@@ -33,17 +33,7 @@
         </div>
         <div class="col-md-6">
             <div class="mb-3">
-                <label class="form-label d-block mb-2">Level Menu</label>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" {{ !$data->main_menu_id ? 'checked' : '' }} type="radio"
-                        name="level_menu" id="inlineRadio1" value="main_menu">
-                    <label class="form-check-label" for="inlineRadio1">Main menu</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" {{ $data->main_menu_id ? 'checked' : '' }} type="radio"
-                        name="level_menu" id="inlineRadio2" value="sub_menu">
-                    <label class="form-check-label" for="inlineRadio2">Sub menu</label>
-                </div>
+                <x-form.radio name="level_menu" label="Level menu" inline="true" :options="['Main menu' => 'main_menu', 'Sub menu' => 'sub_menu']"/>
             </div>
         </div>
 
