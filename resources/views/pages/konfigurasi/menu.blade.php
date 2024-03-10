@@ -13,7 +13,10 @@
                     <div class="row">
                         <div class="col-12">
                             @can('create konfigurasi/menu')
-                                <a class="btn btn-primary mb-3 add" href="{{ route('konfigurasi.menu.create') }}">Tambah</a>
+                                <a class="btn btn-primary mb-3 add" href="{{ route('konfigurasi.menu.create') }}">Add</a>
+                            @endcan
+                            @can('sort konfigurasi/menu')
+                                <a class="mb-3 btn btn-info sort" href="{{ route('konfigurasi.menu.sort') }}">Sort Menu</a>
                             @endcan
                         </div>
                     </div>
@@ -36,6 +39,16 @@
                     }
                 });
             }
+
+            $('.sort').on('click', function(e){
+                e.preventDefault();
+
+                handleAjax(this.href, 'put')
+                .onSuccess(function(res){
+                    window.location.reload()
+                }, false)
+                .excute()
+            })
 
             $('.add').on('click', function(e) {
                 e.preventDefault();
