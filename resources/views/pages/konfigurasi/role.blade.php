@@ -31,22 +31,43 @@
             $('.add').on('click', function(e) {
                 e.preventDefault();
                 handleAjax(this.href)
-                .onSuccess(function(res) {
-                    handleFormSubmit('#form_action')
-                    .setDataTable(datatable)
-                    .init();
-                })
-                .excute();
+                    .onSuccess(function(res) {
+                        handleFormSubmit('#form_action')
+                            .setDataTable(datatable)
+                            .init();
+                    })
+                    .excute();
 
             });
 
-            $('#'+datatable).on('click', '.action', function(e) {
+            $('#' + datatable).on('click', '.action', function(e) {
                 e.preventDefault();
                 handleAjax(this.href).onSuccess(function(res) {
                     handleFormSubmit('#form_action')
                         .setDataTable(datatable)
                         .init();
                 }).excute();
+            });
+
+            $('#' + datatable).on('click', '.delete', function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        handleAjax(this.href, 'delete').onSuccess(function(res) {
+                            showToast(res.status, res.message)
+                            window.LaravelDataTables[datatable].ajax.reload()
+                        }, false).excute();
+                    }
+                })
+
             });
         </script>
     @endpush

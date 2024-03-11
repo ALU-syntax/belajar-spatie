@@ -65,6 +65,7 @@
     <script src="{{ asset('') }}vendor/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
     <script src="{{ asset('') }}assets/js/pages/datatables.min.js"></script>
     <script src="{{ asset('') }}vendor/izitoast/js/iziToast.min.js"></script>
+    <script src="{{ asset('') }}vendor/sweetalert2/sweetalert2.all.min.js"></script>
 
     <!-- js for this page only -->
     @stack('jsLibrary')

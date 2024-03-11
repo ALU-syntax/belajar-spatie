@@ -37,6 +37,17 @@ if(!function_exists('responseSuccess')){
     }
 }
 
+if(!function_exists('responseSuccessDelete')){
+    function responseSuccessDelete(){
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Delete data Successfully',
+        ]);
+
+    }
+}
+
 if(!function_exists('menus')){
     function menus(){
         if(!Cache::has('menus')){
