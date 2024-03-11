@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Konfigurasi;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RoleRequest extends FormRequest
@@ -11,7 +12,7 @@ class RoleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,8 @@ class RoleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required', Rule::unique('roles')->ignore($this->role)],
+            'guard_name' => 'required'
         ];
     }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Konfigurasi;
 
+use App\DataTables\Konfigurasi\RoleDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Konfigurasi\RoleRequest;
 use App\Models\Role;
 use Illuminate\Http\Request;
 
@@ -11,9 +13,9 @@ class RoleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(RoleDataTable $roleDataTable)
     {
-        //
+        return $roleDataTable->render('pages.konfigurasi.role');
     }
 
     /**
@@ -21,15 +23,21 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.konfigurasi.role-form',[
+            'data' => new Role(),
+            'action' => route('konfigurasi.roles.store')
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
-        //
+        $role = new Role($request->validated());
+        $role->save();
+
+        return responseSuccess(true);
     }
 
     /**
@@ -37,7 +45,9 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        //
+        return view('pages.konfigurasi.role-form',[
+            'data' => $role,
+        ]);
     }
 
     /**
@@ -45,15 +55,21 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        return view('pages.konfigurasi.role-form',[
+            'data' => $role,
+            'action' => route('konfigurasi.roles.update', $role->id)
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Role $role)
+    public function update(RoleRequest $request, Role $role)
     {
-        //
+        $role->fill($request->validated());
+        $role->save();
+
+        return responseSuccess(true);
     }
 
     /**

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Konfigurasi\MenuController;
+use App\Http\Controllers\Konfigurasi\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::group(['prefix' => 'konfigurasi', 'as' => 'konfigurasi.'], function(){
         Route::put('menu/sort', [MenuController::class, 'sort'])->name('menu.sort');
         Route::resource('menu', MenuController::class);
+        Route::resource('roles', RoleController::class);
     });
 });
 

@@ -1,4 +1,4 @@
-@props(['size' => 'lg', 'title', 'action' => null ])
+@props(['size' => 'lg', 'title', 'action' => null])
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <form id="form_action" action="{{ $action }}" method="post">
@@ -12,7 +12,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save</button>
+
+                @if ($action)
+                    <button type="submit" class="btn btn-primary">Save</button>
+                @endif
             </div>
         </form>
     </div>
