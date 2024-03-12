@@ -7,13 +7,13 @@
         <div class="content-wrapper">
             <div class="card">
                 <div class="card-header">
-                    <h4>Role</h4>
+                    <h4>Permission</h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
-                            @can('create konfigurasi/roles')
-                                <a class="btn btn-primary mb-3 action" href="{{ route('konfigurasi.roles.create') }}">Add</a>
+                            @can('create konfigurasi/permissions')
+                                <a class="btn btn-primary mb-3 action" href="{{ route('konfigurasi.permissions.create') }}">Add</a>
                             @endcan
                         </div>
                     </div>
@@ -26,10 +26,11 @@
         {!! $dataTable->scripts() !!}
 
         <script>
-            const datatable = 'role-table';
+            const datatable = 'permission-table';
 
             handleAction(datatable);
             handleDelete(datatable);
+
         </script>
     @endpush
 </x-master-layout>

@@ -25,6 +25,30 @@ function handleAction(datatable, onShowAction, onSuccessAction){
 
 }
 
+function handleDelete(datatable, onSuccessAction){
+    $('#' + datatable).on('click', '.delete', function(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                handleAjax(this.href, 'delete').onSuccess(function(res) {
+                    onSuccessAction && onSuccessAction(res)
+                    showToast(res.status, res.message)
+                    window.LaravelDataTables[datatable].ajax.reload(null, false)
+                }, false).excute();
+            }
+        })
+
+    });
+}
+
 function showLoader(show = true) {
     const preloader = $(".preloader");
 
@@ -95,7 +119,7 @@ function handleFormSubmit(selector) {
                     }
 
                     _this.onSuccessCallback && _this.onSuccessCallback(res)
-                    _this.dataTableId && window.LaravelDataTables[_this.dataTableId].ajax.reload()
+                    _this.dataTableId && window.LaravelDataTables[_this.dataTableId].ajax.reload(null, false)
 
                 },
                 complete: function() {

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Konfigurasi\MenuController;
 use App\Http\Controllers\Konfigurasi\RoleController;
+use App\Http\Controllers\Konfigurasi\PermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,7 @@ Route::middleware('auth')->group(function () {
         Route::put('menu/sorting', [MenuController::class, 'sort'])->name('menu.sort');
         Route::resource('menu', MenuController::class);
         Route::resource('roles', RoleController::class);
+        Route::resource('permissions', PermissionController::class);
     });
 });
 
