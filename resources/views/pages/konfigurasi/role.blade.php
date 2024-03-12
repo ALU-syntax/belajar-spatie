@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-12">
                             @can('create konfigurasi/roles')
-                                <a class="btn btn-primary mb-3 add" href="{{ route('konfigurasi.roles.create') }}">Add</a>
+                                <a class="btn btn-primary mb-3 action" href="{{ route('konfigurasi.roles.create') }}">Add</a>
                             @endcan
                         </div>
                     </div>
@@ -28,26 +28,7 @@
         <script>
             const datatable = 'role-table';
 
-            $('.add').on('click', function(e) {
-                e.preventDefault();
-                handleAjax(this.href)
-                    .onSuccess(function(res) {
-                        handleFormSubmit('#form_action')
-                            .setDataTable(datatable)
-                            .init();
-                    })
-                    .excute();
-
-            });
-
-            $('#' + datatable).on('click', '.action', function(e) {
-                e.preventDefault();
-                handleAjax(this.href).onSuccess(function(res) {
-                    handleFormSubmit('#form_action')
-                        .setDataTable(datatable)
-                        .init();
-                }).excute();
-            });
+            handleAction(datatable);
 
             $('#' + datatable).on('click', '.delete', function(e) {
                 e.preventDefault();

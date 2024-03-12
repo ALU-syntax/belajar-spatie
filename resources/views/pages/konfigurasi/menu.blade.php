@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-12">
                             @can('create konfigurasi/menu')
-                                <a class="btn btn-primary mb-3 add" href="{{ route('konfigurasi.menu.create') }}">Add</a>
+                                <a class="btn btn-primary mb-3 action" href="{{ route('konfigurasi.menu.create') }}">Add</a>
                             @endcan
                             @can('sort konfigurasi/menu')
                                 <a class="mb-3 btn btn-info sort" href="{{ route('konfigurasi.menu.sort') }}">Sort Menu</a>
@@ -29,6 +29,8 @@
         {!! $dataTable->scripts() !!}
 
         <script>
+
+            const datatable = 'menu-table'
             function handleMenuChange() {
                 $('[name="level_menu"]').on('change', function() {
                     console.log(this.value)
@@ -50,28 +52,9 @@
                 .excute()
             })
 
-            $('.add').on('click', function(e) {
-                e.preventDefault();
-                handleAjax(this.href)
-                .onSuccess(function(res) {
-                    handleMenuChange();
-                    handleFormSubmit('#form_action')
-                    .setDataTable('menu-table')
-                    .init();
-                })
-                .excute();
-
-            });
-
-            $('#menu-table').on('click', '.action', function(e) {
-                e.preventDefault();
-                handleAjax(this.href).onSuccess(function(res) {
-                    handleMenuChange()
-                    handleFormSubmit('#form_action')
-                        .setDataTable('menu-table')
-                        .init();
-                }).excute();
-            });
+            handleAction(datatable, function(){
+                handleMenuChange()
+            })            
         </script>
     @endpush
 </x-master-layout>
