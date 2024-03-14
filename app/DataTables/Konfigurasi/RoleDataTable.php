@@ -26,8 +26,8 @@ class RoleDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function($row){
-                $action = $this->basicActions($row);
-                return view('action', compact('actions'));
+                $actions = $this->basicActions($row);
+                return view('action', ['actions' => $actions]);
             })
             ->addIndexColumn();
     }

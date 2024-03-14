@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Permission;
 use Illuminate\Database\Seeder;
 use App\Models\Konfigurasi\Menu;
-use App\Models\Permission;
 use App\Traits\HasMenuPermission;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class MenuSeeder extends Seeder
@@ -16,6 +17,8 @@ class MenuSeeder extends Seeder
      */
     public function run(): void
     {
+
+        Cache::forget('menus');
         /** 
          * @var Menu $mm
          */
@@ -29,7 +32,10 @@ class MenuSeeder extends Seeder
         $this->attachMenuPermission($sm, ['create ', 'read ', 'update ', 'delete ', 'sort '], ['ceo']);
 
         $sm = $mm->subMenus()->create(['name' => 'Permission', 'url' => $mm->url . '/permissions', 'category' => $mm->category]);
-        $this->attachMenuPermission($sm, ['create ', 'read ', 'update ', 'delete ', 'sort '], ['ceo']);
+        $this->attachMenuPermission($sm, ['create ', 'read ', 'update ', 'delete '], ['ceo']);
+
+        $sm = $mm->subMenus()->create(['name' => 'Akses Role', 'url' => $mm->url . '/akses-role', 'category' => $mm->category]);
+        $this->attachMenuPermission($sm, [ 'read ', 'update '], ['ceo']);
 
         $sm = $mm->subMenus()->create(['name' => 'Users', 'url' => $mm->url . '/users', 'category' => $mm->category]);
         $this->attachMenuPermission($sm, null, ['ceo']);
