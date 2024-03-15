@@ -20,9 +20,11 @@
                                 <td>
                                     @foreach ($mm->permissions as $permission)
                                         <div class="form-check form-switch form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                            <input class="form-check-input" name="permissions[]"
+                                                value="{{ $permission->name }}" @checked($data->hasPermissionTo($permission->name))
+                                                type="checkbox" id="permission-{{ $mm->id . '-' . $permission->id }}">
                                             <label class="form-check-label"
-                                                for="flexSwitchCheckDefault">{{ explode(' ', $permission->name)[0] }}</label>
+                                                for="{{ $mm->id . '-' . $permission->id }}">{{ explode(' ', $permission->name)[0] }}</label>
                                         </div>
                                     @endforeach
                                 </td>
@@ -33,10 +35,11 @@
                                     <td>
                                         @foreach ($sm->permissions as $permission)
                                             <div class="form-check form-switch form-check-inline">
-                                                <input class="form-check-input" type="checkbox"
-                                                    id="flexSwitchCheckDefault">
+                                                <input class="form-check-input" name="permissions[]"
+                                                    value="{{ $permission->name }}" @checked($data->hasPermissionTo($permission->name))
+                                                    type="checkbox" id="permission-{{ $sm->id . '-' . $permission->id }}">
                                                 <label class="form-check-label"
-                                                    for="flexSwitchCheckDefault">{{ explode(' ', $permission->name)[0] }}</label>
+                                                    for="{{ $sm->id . '-' . $permission->id }}">{{ explode(' ', $permission->name)[0] }}</label>
                                             </div>
                                         @endforeach
                                     </td>

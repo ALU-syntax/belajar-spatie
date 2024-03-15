@@ -44,6 +44,8 @@ class AksesRoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        //
+        $role->syncPermissions($request->permissions);
+
+        return responseSuccess(true);
     }
 }
