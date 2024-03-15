@@ -21,7 +21,15 @@
         <script>
             const datatable = 'role-table';
 
-            handleAction(datatable);
+            handleAction(datatable, function(){
+                $('.copy-role').on('change', function(){
+                    console.log(this.value)
+                    handleAjax(`{{ url('konfigurasi/akses-role') }}/${this.value}/role`)
+                    .onSuccess(function(res){
+                        $('#menu_permissions').html(res)
+                    }, false).excute();
+                })
+            });
             handleDelete(datatable);
         </script>
     @endpush

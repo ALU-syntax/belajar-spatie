@@ -31,11 +31,12 @@ class AksesRoleController extends Controller
      */
     public function edit(Role $role)
     {
-        $menus = Menu::with('permissions', 'subMenus.permissions')->whereNull('main_menu_id')->get();
+        $roles = Role::where('id', '!=', $role->id)->get()->pluck('id', 'name');
         return view('pages.konfigurasi.akses-role-form',[
             'data' => $role,
             'action' => route('konfigurasi.akses-role.update', $role->id),
-            'menus' => $menus
+            'menus' => $this->getMenus(),
+            'roles' => $roles,
         ]);
     }
 
@@ -47,5 +48,19 @@ class AksesRoleController extends Controller
         $role->syncPermissions($request->permissions);
 
         return responseSuccess(true);
+    }
+
+    /**
+     * getPermissionsByRole
+     */
+    public function getPermissionsByRole(Role $role){
+        return view('pages.konfigurasi.akses-role-items',[
+            'data' => $role,
+            'menus' => $this->getMenus(),
+        ]);
+    }
+
+    private function getMenus(){
+        return Menu::with('permissions', 'subMenus.permissions')->whereNull('main_menu_id')->get();
     }
 }

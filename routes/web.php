@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('menu', MenuController::class);
         Route::resource('roles', RoleController::class);
         Route::resource('permissions', PermissionController::class);
+        Route::get('akses-role/{role}/role', [AksesRoleController::class, 'getPermissionsByRole']);
         Route::resource('akses-role', AksesRoleController::class)->except(['create', 'store', 'destroy'])->parameters(['akses-role'=> 'role']);
     });
 });
