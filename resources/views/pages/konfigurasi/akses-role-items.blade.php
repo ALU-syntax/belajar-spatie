@@ -15,6 +15,7 @@
     </tr>
     @foreach ($mm->subMenus as $sm)
         <tr>
+            <td>&nbsp; &nbsp; &nbsp; &nbsp; <x-form.checkbox name="parent" label="{{ $sm->name }}" class="parent" /></td>
             <td>&nbsp; &nbsp; &nbsp; &nbsp; {{ $sm->name }}</td>
             <td>
                 @foreach ($sm->permissions as $permission)
