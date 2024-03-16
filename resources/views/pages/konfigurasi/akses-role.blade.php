@@ -46,6 +46,14 @@
             handleAction(datatable, function(){
                 handleCheckMenu()
 
+                $('.search').on('keyup', function(){
+                    const value = this.value.toLowerCase()
+                    $('#menu_permissions tr').show().filter(function(i, item){
+                        return item.innerText.toLowerCase().indexOf(value) == '-1'
+                    })
+
+                })
+
                 $('.copy-role').on('change', function(){
                     console.log(this.value)
                     handleAjax(`{{ url('konfigurasi/akses-role') }}/${this.value}/role`)
