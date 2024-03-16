@@ -6,7 +6,7 @@
         <div class="col-12">
             <h5>Role: {{ $data->name }}</h5>
             <div class="mb-3 mt-3">
-                <x-form.select class="copy-role" label="Pilih dari role" placeholder="Pilih role" name="role" :options="$roles" />
+                <x-form.select class="copy-role" label="Copy dari role" placeholder="Pilih role" :options="$roles" />
                 <x-form.input name="search" class="search" label="Cari menu" placeholder="Cari..." />
             </div>
             <div>

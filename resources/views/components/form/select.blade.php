@@ -1,8 +1,11 @@
-@props(['name', 'label', 'value' => '', 'placeholder' => $label, 'options' => [] ])
+@props(['label' => null, 'value' => '', 'id' => 'select_' . rand(), 'placeholder' => $label, 'options' => []])
 
 <div class="mb-3">
-    <label for="" class="form-label">{{ $label }}</label>
-    <select {{ $attributes->merge(['class' => 'form-select form-select-sm mb-3']) }}  name="{{ $name }}" aria-label="{{ $name }}">
+    @if ($label)
+        <label for="{{ $id }}" class="form-label">{{ $label }}</label>
+    @endif
+    <select {{ $attributes->merge(['class' => 'form-select form-select-sm mb-3']) }} id="{{ $id }}"
+        aria-label="{{ $id }}">
         <option selected disabled>{{ $placeholder }}</option>
         @foreach ($options as $key => $item)
             <option value="{{ $item }}" @selected($value == $item)>
