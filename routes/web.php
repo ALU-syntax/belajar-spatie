@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Konfigurasi\AksesController;
 use App\Http\Controllers\Konfigurasi\AksesRoleController;
+use App\Http\Controllers\Konfigurasi\AksesUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Konfigurasi\MenuController;
@@ -39,6 +40,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('permissions', PermissionController::class);
         Route::get('akses-role/{role}/role', [AksesRoleController::class, 'getPermissionsByRole']);
         Route::resource('akses-role', AksesRoleController::class)->except(['create', 'store', 'destroy'])->parameters(['akses-role'=> 'role']);
+        Route::resource('akses-user', AksesUserController::class)->except(['create', 'store', 'destroy'])->parameters(['akses-user'=> 'user']);
     });
 });
 
