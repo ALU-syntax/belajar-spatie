@@ -2,7 +2,7 @@
     <div class="header-wrapper">
         <div class="header-left">
             <div class="sidebar-toggle action-toggle"><i class="fas fa-bars"></i></div>
-            
+
         </div>
         <div class="header-content">
             <div class="theme-switch-icon"></div>
@@ -17,7 +17,8 @@
                     <li class="menu-content ps-menu">
                         <a href="#">
                             <div class="message-image">
-                                <img src="{{ asset('') }}assets/images/avatar1.png" class="rounded-circle w-100" alt="user1">
+                                <img src="{{ asset('') }}assets/images/avatar1.png" class="rounded-circle w-100"
+                                    alt="user1">
                             </div>
                             <div class="message-content read">
                                 <div class="subject">
@@ -31,7 +32,8 @@
                         </a>
                         <a href="#">
                             <div class="message-image">
-                                <img src="{{ asset('') }}assets/images/avatar2.png" class="rounded-circle w-100" alt="user1">
+                                <img src="{{ asset('') }}assets/images/avatar2.png" class="rounded-circle w-100"
+                                    alt="user1">
                             </div>
                             <div class="message-content">
                                 <div class="subject">
@@ -45,7 +47,8 @@
                         </a>
                         <a href="#">
                             <div class="message-image">
-                                <img src="{{ asset('') }}assets/images/avatar1.png" class="rounded-circle w-100" alt="user1">
+                                <img src="{{ asset('') }}assets/images/avatar1.png" class="rounded-circle w-100"
+                                    alt="user1">
                             </div>
                             <div class="message-content read">
                                 <div class="subject">
@@ -59,7 +62,8 @@
                         </a>
                         <a href="#">
                             <div class="message-image">
-                                <img src="{{ asset('') }}assets/images/avatar2.png" class="rounded-circle w-100" alt="user1">
+                                <img src="{{ asset('') }}assets/images/avatar2.png" class="rounded-circle w-100"
+                                    alt="user1">
                             </div>
                             <div class="message-content">
                                 <div class="subject">
@@ -73,7 +77,8 @@
                         </a>
                         <a href="#">
                             <div class="message-image">
-                                <img src="{{ asset('') }}assets/images/avatar2.png" class="rounded-circle w-100" alt="user1">
+                                <img src="{{ asset('') }}assets/images/avatar2.png" class="rounded-circle w-100"
+                                    alt="user1">
                             </div>
                             <div class="message-content">
                                 <div class="subject">
@@ -159,18 +164,16 @@
                         </a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
+                            <a href="#" onclick="event.preventDefault(); this.closest('form').submit();">
+                                <div class="description">
+                                    <i class="ti-power-off"></i> Logout
+                                </div>
+                            </a>
 
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                            {{-- <x-dropdown-link :href="route('logout')">
                                 {{ __('Log Out') }}
-                            </x-dropdown-link>
+                            </x-dropdown-link> --}}
                         </form>
-                        <a href="#">
-                            <div class="description">
-                                <i class="ti-power-off"></i> Logout
-                            </div>
-                        </a>
                     </li>
                 </ul>
             </div>

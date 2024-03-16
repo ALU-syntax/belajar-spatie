@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function () {
         Route::get('akses-role/{role}/role', [AksesRoleController::class, 'getPermissionsByRole']);
         Route::resource('akses-role', AksesRoleController::class)->except(['create', 'store', 'destroy'])->parameters(['akses-role'=> 'role']);
         Route::get('akses-user/{user}/user', [AksesUserController::class, 'getPermissionsByUser']);
-        Route::resource('akses-user', AksesUserController::class)->except(['create', 'store', 'destroy'])->parameters(['akses-user'=> 'user']);
+        Route::resource('akses-user', AksesUserController::class)->except(['create', 'store', 'destroy'])->parameters(['akses-user'=> 'user'])->middleware('can:read konfigurasi/akses-user');
     });
 });
 
