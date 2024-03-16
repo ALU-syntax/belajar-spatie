@@ -7,9 +7,13 @@ use Illuminate\Http\Request;
 use App\Models\Konfigurasi\Menu;
 use App\Http\Controllers\Controller;
 use App\DataTables\Konfigurasi\RoleDataTable;
+use App\Repositories\MenuRepository;
 
 class AksesRoleController extends Controller
 {
+    public function __construct(protected MenuRepository $menuRepository) {
+        $this->menuRepository = $menuRepository;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -35,7 +39,7 @@ class AksesRoleController extends Controller
         return view('pages.konfigurasi.akses-role-form',[
             'data' => $role,
             'action' => route('konfigurasi.akses-role.update', $role->id),
-            'menus' => $this->getMenus(),
+            'menus' => $this->menuRepository->getMainMenuWithPermissions(),
             'roles' => $roles,
         ]);
     }
@@ -56,11 +60,9 @@ class AksesRoleController extends Controller
     public function getPermissionsByRole(Role $role){
         return view('pages.konfigurasi.akses-role-items',[
             'data' => $role,
-            'menus' => $this->getMenus(),
+            'menus' => $this->menuRepository->getMainMenuWithPermissions(),
         ]);
     }
 
-    private function getMenus(){
-        return Menu::with('permissions', 'subMenus.permissions')->whereNull('main_menu_id')->get();
-    }
+    
 }

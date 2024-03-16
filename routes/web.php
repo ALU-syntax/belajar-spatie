@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('permissions', PermissionController::class);
         Route::get('akses-role/{role}/role', [AksesRoleController::class, 'getPermissionsByRole']);
         Route::resource('akses-role', AksesRoleController::class)->except(['create', 'store', 'destroy'])->parameters(['akses-role'=> 'role']);
+        Route::get('akses-user/{user}/user', [AksesUserController::class, 'getPermissionsByUser']);
         Route::resource('akses-user', AksesUserController::class)->except(['create', 'store', 'destroy'])->parameters(['akses-user'=> 'user']);
     });
 });

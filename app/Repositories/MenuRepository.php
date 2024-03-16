@@ -5,6 +5,10 @@ use App\Models\Konfigurasi\Menu;
 
 class MenuRepository{
 
+    public function getMainMenuWithPermissions(){
+        return Menu::with('permissions', 'subMenus.permissions')->whereNull('main_menu_id')->get();
+    }
+
     public function getMainMenus(){
         return Menu::whereNull('main_menu_id')->select('id', 'name')->get()
             ->flatmap(function($item){

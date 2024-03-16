@@ -3,6 +3,7 @@
 namespace App\DataTables\Konfigurasi;
 
 use App\Models\User;
+use App\Traits\DataTableHelper;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -14,6 +15,7 @@ use Yajra\DataTables\Services\DataTable;
 
 class UserDataTable extends DataTable
 {
+    use DataTableHelper;
     /**
      * Build the DataTable class.
      *
@@ -22,7 +24,10 @@ class UserDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'user.action')
+            ->addColumn('action', function($row){
+                $actions = $this->basicActions($row);
+                return view('action', ['actions' => $actions]);
+            })
             ->addIndexColumn();
     }
 

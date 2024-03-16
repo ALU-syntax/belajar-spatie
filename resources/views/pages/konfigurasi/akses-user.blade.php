@@ -54,9 +54,9 @@
 
                 })
 
-                $('.copy-role').on('change', function(){
+                $('.copy').on('change', function(){
                     console.log(this.value)
-                    handleAjax(`{{ url('konfigurasi/akses-role') }}/${this.value}/role`)
+                    handleAjax(`{{ url('konfigurasi/akses-user') }}/${this.value}/user`)
                     .onSuccess(function(res){
                         $('#menu_permissions').html(res)
                         handleCheckMenu()
